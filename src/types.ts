@@ -363,7 +363,7 @@ export function messageToTypeName(
   }
   // Look for other special prototypes like Timestamp that aren't technically wrapper types
   if (!typeOptions.keepValueType && protoType === '.google.protobuf.Timestamp' && options.useDate) {
-    return code`Date`;
+    return code`string`;
   }
   const [module, type] = toModuleAndType(typeMap, protoType);
   return code`${imp(`${type}@./${module}`)}`;
