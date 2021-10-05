@@ -366,6 +366,14 @@ export function isTimestamp(field: FieldDescriptorProto): boolean {
   return field.typeName === '.google.protobuf.Timestamp';
 }
 
+export function isStruct(field: FieldDescriptorProto): boolean {
+  return field.typeName === '.google.protobuf.Struct';
+}
+
+export function isStructValue(field: FieldDescriptorProto): boolean {
+  return field.typeName === '.google.protobuf.Value';
+}
+
 export function isValueType(ctx: Context, field: FieldDescriptorProto): boolean {
   return valueTypeName(ctx, field.typeName) !== undefined;
 }
@@ -444,6 +452,12 @@ export function messageToTypeName(
     if (options.useDate == DateOption.STRING) {
       return code`string`;
     }
+  }
+  if (!typeOptions.keepValueType && protoType === '.google.protobuf.Struct') {
+    return code`{ [key: string]: any }`
+  }
+  if (!typeOptions.keepValueType && protoType === '.google.protobuf.Value') {
+    return code`any`
   }
   const [module, type] = toModuleAndType(typeMap, protoType);
   return code`${imp(`${type}@./${module}`)}`;
