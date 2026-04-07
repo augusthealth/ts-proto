@@ -5,3 +5,4 @@
 /integration/*/pbjs.js
 /integration/*/pbjs.d.ts
 coverage/
+.wkts/
