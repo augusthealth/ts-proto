@@ -84,7 +84,7 @@ function isTransientField(fieldDesc: FieldDescriptorProto, meta: TransientExtens
     const end = reader.pos + messageLen;
     while (reader.pos < end) {
       const tag = reader.uint32();
-      if ((tag >>> 3) === meta.transientFieldNumber) {
+      if (tag >>> 3 === meta.transientFieldNumber) {
         return reader.bool();
       }
       reader.skipType(tag & 7);
@@ -517,7 +517,7 @@ function makeTimestampMethods(options: Options, longs: ReturnType<typeof makeLon
 
 // When useOptionals=true, non-scalar fields are translated into optional properties.
 function isOptionalProperty(field: FieldDescriptorProto, options: Options): boolean {
-  return (options.useOptionals && (isMessage(field) || isEnum(field)) || isRepeated(field)) || field.proto3Optional;
+  return (options.useOptionals && (isMessage(field) || isEnum(field))) || isRepeated(field) || field.proto3Optional;
 }
 
 // Create the interface with properties

@@ -454,10 +454,10 @@ export function messageToTypeName(
     }
   }
   if (!typeOptions.keepValueType && protoType === '.google.protobuf.Struct') {
-    return code`{ [key: string]: any }`
+    return code`{ [key: string]: any }`;
   }
   if (!typeOptions.keepValueType && protoType === '.google.protobuf.Value') {
-    return code`any`
+    return code`any`;
   }
   const [module, type] = toModuleAndType(typeMap, protoType);
   return code`${imp(`${type}@./${module}`)}`;

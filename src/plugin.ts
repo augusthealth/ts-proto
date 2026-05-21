@@ -18,9 +18,7 @@ import { generateTypeRegistry } from './generate-type-registry';
  * FieldOptions and the `transient` field inside the Permission message,
  * by looking them up by name in the file descriptors.
  */
-function resolveTransientExtension(
-  protoFiles: Array<FileDescriptorProto>
-): TransientExtensionMeta | undefined {
+function resolveTransientExtension(protoFiles: Array<FileDescriptorProto>): TransientExtensionMeta | undefined {
   // Find the "permissions" extension on FieldOptions
   let ext: FieldDescriptorProto | undefined;
   for (const file of protoFiles) {
